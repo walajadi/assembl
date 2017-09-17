@@ -72,6 +72,7 @@ class Discussion(Document):
         :return:
         """
         self.authorized_users[permission].append(user_id)
+        self.save()
 
 
     def number_of_participants(self):
@@ -79,7 +80,7 @@ class Discussion(Document):
         given a discussion, return the number of participants who have contributed to the discussion.
         :return:
         """
-        return len(set([post.id for post in self.posts]))
+        return len(set([post.author for post in self.posts]))
 
 
 def create_discussion():
