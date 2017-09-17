@@ -1,6 +1,7 @@
 
 
 from mongoengine import connect, Document, ListField, StringField, BooleanField, DateTimeField, IntField
+from datetime import datetime
 
 connect('assembl')
 
@@ -8,17 +9,13 @@ connect('assembl')
 class Post(Document):
 
     title = StringField()
-    description = StringField()
     is_top = BooleanField()
     name = StringField()
     topics = ListField(StringField)
-    created = DateTimeField()
+    created = DateTimeField(default=datetime.now())
     author = StringField()  # user_id
     content = StringField()
     likes = IntField()
     ideas = ListField(StringField)
-
-    meta = {
-        'db_alias': 'assembl'
-    }
+    parent = StringField()  # post_id as str, empty if is_top
 
