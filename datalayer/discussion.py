@@ -17,8 +17,6 @@ class Discussion(Document):
     creator = StringField(required=True)  # user_id as str
     authorized_users = DictField(default={'read': [], 'post': []})
 
-    # Set of methods linked to discussion
-
     def create_post(self, post):
         """
         Add a post to a discussion
@@ -49,21 +47,6 @@ class Discussion(Document):
         self.ideas.append(idea_id)
         self.save()
 
-    def update_idea(self):
-        """
-        update the model of an idea with new content, if updater has associated permissions
-        :return:
-        """
-        pass
-
-    def set_local_permission(self, user):
-        """
-        given a discussion, set a local permission to a user for that discussion. A local set of permissions for a user
-        supersedes the global one
-        :return:
-        """
-        pass
-
     def autorize_user(self, user_id, permission):
         """
         Add user and authorization : read or post.
@@ -74,19 +57,9 @@ class Discussion(Document):
         self.authorized_users[permission].append(user_id)
         self.save()
 
-
     def number_of_participants(self):
         """
         given a discussion, return the number of participants who have contributed to the discussion.
         :return:
         """
         return len(set([post.author for post in self.posts]))
-
-
-def create_discussion():
-    """
-    creates a discussion
-    :return:
-    """
-    pass
-
