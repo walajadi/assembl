@@ -2,7 +2,6 @@
 from datetime import datetime
 from mongoengine import connect, Document, ListField, StringField, BooleanField, DateTimeField, IntField, DictField
 
-
 connect('assembl')
 
 
@@ -15,5 +14,5 @@ class Idea(Document):
     deleted = DateTimeField()
     posts = ListField(StringField())  # post id associated to this idea
     creator = StringField()  # user_id as str
-    children_ideas = ListField(StringField())  # idea_ids list
-    authorized_users = DictField()
+    ancestor = StringField()  # top idea id as str
+
