@@ -93,6 +93,19 @@ def get_all_children_posts(parent_post):
     return Post.objects(parent=str(parent_post.id))
 
 
+def print_ideas(idea):
+    """
+    print idea and sub-ideas.
+    :param idea:
+    :return:
+    """
+    sub_ideas = Idea.objects(ancestor=str(idea.id))
+    all_posts_ids = []
+    print(idea.description)
+    for sub_idea in sub_ideas:
+        print('{}{}'.format(' ' * 8, sub_idea.description))
+
+
 if __name__ == '__main__':
     # create some users
     user_1 = User(**{'username': 'zorro', 'email': 'markof@zorro.com', 'password': 'asdf123', 'verified': True,
